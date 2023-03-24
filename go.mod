@@ -1,4 +1,4 @@
-module sat-api
+module github.com/AgentNemo00/satelite-api
 
 go 1.20
 
