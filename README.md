@@ -12,21 +12,6 @@ Check out the OpenAPI doc for the full feature set.
 go run main.go
 ````
 
-## Environment variables
-
-
-
 ## Documentation
 
 Run th api and open ``localhost:10001/swagger/index.html``
-
-## TODO
-
-### Must
-
-- poly split - refactor and debug with test data
-
-### Improvements
-
-- change compression algo for delivering data
-- refactor static map to use faster decompression
