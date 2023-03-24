@@ -2,8 +2,8 @@ package converter
 
 import (
 	"context"
+	"github.com/AgentNemo00/satelite-api/model"
 	"io"
-	"sat-api/model"
 )
 
 type Converter interface {

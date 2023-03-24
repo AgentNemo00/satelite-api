@@ -1,8 +1,8 @@
 package model
 
 import (
+	"github.com/AgentNemo00/satelite-api/geometry"
 	"github.com/golang/geo/s2"
-	"sat-api/geometry"
 )
 
 type Point struct {

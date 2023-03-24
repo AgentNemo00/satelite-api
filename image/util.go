@@ -2,11 +2,11 @@ package image
 
 import (
 	"bytes"
+	"github.com/AgentNemo00/satelite-api/model"
 	"image"
 	"image/png"
 	"io"
 	"math"
-	"sat-api/model"
 )
 
 func CalculateOptimizedSize(points []model.Point, tolerance float64) (int, int, int, int) {

@@ -2,13 +2,13 @@ package converter
 
 import (
 	"context"
+	"github.com/AgentNemo00/satelite-api/geometry"
+	image2 "github.com/AgentNemo00/satelite-api/image"
+	"github.com/AgentNemo00/satelite-api/model"
 	sm "github.com/flopp/go-staticmaps"
 	"image"
 	"image/color"
 	"io"
-	"sat-api/geometry"
-	image2 "sat-api/image"
-	"sat-api/model"
 	"sync"
 )
 

@@ -2,7 +2,7 @@ package converter
 
 import (
 	"context"
-	"sat-api/model"
+	"github.com/AgentNemo00/satelite-api/model"
 )
 
 type SentinelSat struct{}

@@ -3,12 +3,12 @@ package api
 import (
 	"context"
 	"fmt"
+	_ "github.com/AgentNemo00/satelite-api/docs"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	httpSwagger "github.com/swaggo/http-swagger"
 	"net/http"
 	"net/url"
-	_ "sat-api/docs"
 )
 
 type Module interface {

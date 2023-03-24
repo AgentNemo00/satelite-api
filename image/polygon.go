@@ -1,10 +1,10 @@
 package image
 
 import (
+	"github.com/AgentNemo00/satelite-api/geometry"
 	"image"
 	"image/color"
 	"image/draw"
-	"sat-api/geometry"
 )
 
 type Point struct {

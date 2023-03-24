@@ -2,12 +2,12 @@ package main
 
 import (
 	"context"
+	"github.com/AgentNemo00/satelite-api/api"
+	"github.com/AgentNemo00/satelite-api/converter"
 	"log"
 	_ "net/http/pprof"
 	"os"
 	"os/signal"
-	"sat-api/api"
-	"sat-api/converter"
 )
 
 func main() {

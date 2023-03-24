@@ -2,10 +2,10 @@ package api
 
 import (
 	"encoding/json"
+	"github.com/AgentNemo00/satelite-api/converter"
+	"github.com/AgentNemo00/satelite-api/model"
 	"log"
 	"net/http"
-	"sat-api/converter"
-	"sat-api/model"
 )
 
 type Payload struct {
