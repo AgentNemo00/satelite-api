@@ -46,5 +46,9 @@ func StartWithInstruments(ctx context.Context, handler Handler) error {
 	if err != nil {
 		return err
 	}
+	go func() {
+		<-ctx.Done()
+		apiHandler.Stop(ctx)
+	}()
 	return apiHandler.Start()
 }
