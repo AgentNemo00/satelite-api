@@ -16,3 +16,7 @@ go run cmd/geo-converter/main.go
 ## Documentation
 
 Run th api and open ``localhost:10001/v1/openapi``
+
+## Instrumentation
+
+Ping and metrics endpoint are included at `/ping` and `/metrics`
