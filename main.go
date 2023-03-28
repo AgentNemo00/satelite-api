@@ -3,34 +3,21 @@ package main
 import (
 	"context"
 	"github.com/AgentNemo00/satelite-api/api"
-	"github.com/AgentNemo00/satelite-api/converter"
+	"github.com/AgentNemo00/satelite-api/config"
+	"github.com/AgentNemo00/sca-instruments/containerization"
 	"log"
 	_ "net/http/pprof"
-	"os"
-	"os/signal"
 )
 
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
-	go func() {
-		c := make(chan os.Signal, 1)
-		signal.Notify(c, os.Interrupt)
-		<-c
-		cancel()
-	}()
-	err := api.Start(ctx, api.V1{Converter: converter.OpenStreet{
-		Name:                    "OpenStreet",
-		Signature:               "",
-		OptimizedSizeToleration: 10,
-		AreaWeight:              1.5,
-		DefaultHeight:           512,
-		DefaultWidth:            512,
-		MaxZoom:                 20,
-		MaximalArea:             25340.20196778653, // e-10
-		GeoDataMultiplier:       10000000,
-		Cache:                   nil, //sm.NewTileCacheFromUserCache(0777),
-		ParallelAtNumberOf:      3,
-	}})
+	go containerization.Interrupt(cancel)
+	cvt, err := config.ConverterByConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Printf("Starting service with config %#v\n", cvt)
+	err = api.Start(ctx, api.V1{Converter: cvt})
 	if err != nil {
 		log.Println(err)
 	}
