@@ -10,7 +10,7 @@ Check out the OpenAPI doc for the full feature set.
 - Run
 
 ````shell
-go run main.go
+go run cmd/geo-converter/main.go
 ````
 
 ## Documentation
