@@ -17,7 +17,7 @@ func main() {
 		log.Fatal(err)
 	}
 	log.Printf("Starting service with config %#v\n", cvt)
-	err = api.Start(ctx, api.V1{Converter: cvt})
+	err = api.StartWithInstruments(ctx, api.Handler{Converter: cvt})
 	if err != nil {
 		log.Println(err)
 	}
