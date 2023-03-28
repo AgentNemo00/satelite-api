@@ -1,0 +1,106 @@
+openapi: 3.0.1
+info:
+  title: "GEO data convert"
+  version: "1"
+servers:
+  - url: /
+paths:
+  /v1/info:
+    get:
+      tags:
+        - V1
+      summary: Information
+      description: Informations and Feature set of the converter
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/converter.Information'
+        500:
+          description: Internal Server Error
+          content: {}
+  /v1/sat:
+    post:
+      tags:
+        - V1
+      summary: Generate Image
+      description: Generates an image from geo data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api.Payload'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        409:
+          description: Conflict
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      x-codegen-request-body-name: data
+components:
+  schemas:
+    api.Payload:
+      type: object
+      properties:
+        clipping:
+          type: boolean
+          description: Clips the image
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.GeoPoint'
+        cut_for_max_zoom:
+          type: boolean
+          description: Cuts object into smaller ones to archive max zoom if needed.
+            Every feature is also applied on the sub images
+        height:
+          type: integer
+          description: Initial image height
+        map_type:
+          type: string
+          description: Map type for image generation
+        optimized_size:
+          type: boolean
+          description: Reduces the image dimension if possible.
+        width:
+          type: integer
+          description: Initial image width
+    converter.Information:
+      type: object
+      properties:
+        clipping:
+          type: boolean
+          description: Clipping feature enabled
+        default_height:
+          type: integer
+          description: Default height
+        default_map_type:
+          type: string
+          description: Default map type
+        default_width:
+          type: integer
+          description: Default width
+        map_types:
+          type: array
+          description: Available map types
+          items:
+            type: string
+        name:
+          type: string
+          description: Module name
+    model.GeoPoint:
+      type: object
+      properties:
+        lat:
+          type: number
+          description: Latitude
+        long:
+          type: number
+          description: Longitude

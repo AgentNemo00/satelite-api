@@ -5,26 +5,27 @@ import (
 	router2 "github.com/AgentNemo00/sca-instruments/api/router"
 	"github.com/AgentNemo00/sca-instruments/api/router/routen"
 	"github.com/AgentNemo00/sca-instruments/api/validation"
+	"github.com/AgentNemo00/sca-instruments/openapi"
 	"net/http"
 )
 
-//	@title			Sat Image API
-//	@version		1.0
-//	@description	API for converting geo data to image
+type API struct {
+	Specs   *openapi.Openapi
+	Handler Handler
+	Port    int
+}
 
-//	@host		localhost:10001
-//	@BasePath	/
-
-// Start - start api
-func StartWithInstruments(ctx context.Context, handler Handler) error {
+func (a API) Start(ctx context.Context) error {
 	validator := validation.NewValidator(func() interface{} {
 		return &Payload{}
 	})
-	base := router2.Simple(
+	base := router2.SimpleWithCommonPath(
+		"",
+		a.Specs,
 		routen.Basic{
 			Method:  http.MethodGet,
 			Path:    "/info",
-			Handler: handler.Information,
+			Handler: a.Handler.Information,
 		},
 		routen.Validation{
 			Basic: routen.Basic{
@@ -32,7 +33,7 @@ func StartWithInstruments(ctx context.Context, handler Handler) error {
 				Path:   "/sat",
 			},
 			Validator: &validator,
-			Handler:   handler.Sat,
+			Handler:   a.Handler.Sat,
 		},
 	)
 	apiHandler := router2.NewHandler(&router2.Config{
@@ -40,7 +41,7 @@ func StartWithInstruments(ctx context.Context, handler Handler) error {
 		Ping:                  true,
 		LoggerSkipInfraRoutes: true,
 		Development:           false,
-		Port:                  10001,
+		Port:                  a.Port,
 	})
 	err := apiHandler.Build(base)
 	if err != nil {

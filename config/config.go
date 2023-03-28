@@ -8,6 +8,7 @@ import (
 )
 
 type Config struct {
+	Port                    int
 	ConverterName           string
 	Signature               string
 	OptimizedSizeToleration float64
@@ -22,6 +23,9 @@ type Config struct {
 }
 
 func (c *Config) Default() {
+	if c.Port == 0 {
+		c.Port = 10001
+	}
 	if c.ConverterName == "" {
 		c.ConverterName = "OpenStreet"
 	}
@@ -45,7 +49,7 @@ func (c *Config) Default() {
 	}
 }
 
-func ConverterByConfig() (converter.Converter, error) {
+func ConverterByConfig(config *Config) (converter.Converter, error) {
 	c, err := configuration.ByEnv(&Config{})
 	if err != nil {
 		return nil, err
