@@ -16,7 +16,7 @@ type API struct {
 }
 
 func (a API) Start(ctx context.Context) error {
-	validator := validation.NewValidator(func() interface{} {
+	validator := validation.NewValidator(func() validation.Model {
 		return &Payload{}
 	})
 	base := router2.SimpleWithCommonPath(
@@ -27,12 +27,12 @@ func (a API) Start(ctx context.Context) error {
 			Path:    "/info",
 			Handler: a.Handler.Information,
 		},
-		routen.Validation{
+		&routen.Validation{
 			Basic: routen.Basic{
 				Method: http.MethodPost,
 				Path:   "/sat",
 			},
-			Validator: &validator,
+			Validator: validator,
 			Handler:   a.Handler.Sat,
 		},
 	)
