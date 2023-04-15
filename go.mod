@@ -3,7 +3,7 @@ module github.com/AgentNemo00/satelite-api
 go 1.20
 
 require (
-	github.com/AgentNemo00/sca-instruments v0.1.1
+	github.com/AgentNemo00/sca-instruments v0.1.2
 	github.com/flopp/go-staticmaps v0.0.0-20220221183018-c226716bec53
 	github.com/golang/geo v0.0.0-20210211234256-740aa86cb551
 )

@@ -3,7 +3,6 @@ package config
 import (
 	"fmt"
 	"github.com/AgentNemo00/satelite-api/converter"
-	"github.com/AgentNemo00/sca-instruments/configuration"
 	sm "github.com/flopp/go-staticmaps"
 )
 
@@ -50,14 +49,6 @@ func (c *Config) Default() {
 }
 
 func ConverterByConfig(config *Config) (converter.Converter, error) {
-	c, err := configuration.ByEnv(&Config{})
-	if err != nil {
-		return nil, err
-	}
-	config, ok := c.(*Config)
-	if !ok {
-		return nil, fmt.Errorf("could not convert config")
-	}
 	var cvt converter.Converter
 	switch config.ConverterName {
 	case "OpenStreet":

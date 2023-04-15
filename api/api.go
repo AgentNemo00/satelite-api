@@ -6,6 +6,7 @@ import (
 	"github.com/AgentNemo00/sca-instruments/api/router/routen"
 	"github.com/AgentNemo00/sca-instruments/api/validation"
 	"github.com/AgentNemo00/sca-instruments/openapi"
+	"log"
 	"net/http"
 )
 
@@ -49,7 +50,10 @@ func (a API) Start(ctx context.Context) error {
 	}
 	go func() {
 		<-ctx.Done()
-		apiHandler.Stop(ctx)
+		err := apiHandler.Stop(ctx)
+		if err != nil {
+			log.Println(err)
+		}
 	}()
 	return apiHandler.Start()
 }

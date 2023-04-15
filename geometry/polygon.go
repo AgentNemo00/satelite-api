@@ -132,7 +132,7 @@ func (p *Polygon) FindNearestPoint(point *Vector) *Vector {
 		pV := line.GetSegmentNearestPoint(point)
 		l := pV.Sub(point).Length()
 		if l < distance {
-			distance = l
+			//distance = l
 			result = pV
 		}
 	}
@@ -140,7 +140,7 @@ func (p *Polygon) FindNearestPoint(point *Vector) *Vector {
 	pV := line.GetSegmentNearestPoint(point)
 	l := pV.Sub(point).Length()
 	if l < distance {
-		distance = l
+		//distance = l
 		result = pV
 	}
 	return result
@@ -159,7 +159,7 @@ func (p *Polygon) SplitNearestEdge(point *Vector) {
 		pV := line.GetSegmentNearestPoint(point)
 		l := pV.Sub(point).Length()
 		if l < distance {
-			distance = l
+			//distance = l
 			ri = i
 			result = pV
 		}
@@ -168,7 +168,7 @@ func (p *Polygon) SplitNearestEdge(point *Vector) {
 	pV := line.GetSegmentNearestPoint(point)
 	l := pV.Sub(point).Length()
 	if l < distance {
-		distance = l
+		//distance = l
 		ri = p.Length() - 1
 		result = pV
 	}
