@@ -6,6 +6,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/AgentNemo00/sca-instruments/log"
 	"io"
 	"mime"
 	"net/http"
@@ -66,7 +67,10 @@ func (r Result) asZip(ctx context.Context, writer http.ResponseWriter) error {
 	for i, im := range r.Images {
 		select {
 		case <-ctx.Done():
-			zipWriter.Close()
+			err := zipWriter.Close()
+			if err != nil {
+				log.Ctx(ctx).Error(err.Error())
+			}
 			return ctx.Err()
 		default:
 			wg.Add(1)
